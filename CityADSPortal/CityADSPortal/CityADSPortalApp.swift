@@ -12,6 +12,7 @@ struct CityADSPortalApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(NetworkService())
         }
     }
 }

@@ -1,5 +1,6 @@
 
 import Foundation
+import SwiftUI
 
 class NTLMAuthenticationSessionTaskDelegate : NSObject, URLSessionTaskDelegate {
     
@@ -48,13 +49,32 @@ final class NetworkService: ObservableObject {
         
         request(url: url) { parsData in
             if let loginResult = try? JSONDecoder().decode(LoginResponse.self, from: parsData) {
-            
-                DispatchQueue.main.sync {
                     completion(loginResult)
-                }
             }
         }
+    }
+    
+    func getEmployees(completion: @escaping (EmployeesResponse) -> Void) {
         
+        let url = "https://1c.cityads.com/LF/hs/portal/emploeelist"
+        
+        request(url: url) { parsData in
+            if let result = try? JSONDecoder().decode(EmployeesResponse.self, from: parsData) {
+                    completion(result)
+            }
+        }
+    }
+    
+    func getImage(id: String, completion: @escaping (UIImage) -> Void) {
+        
+        let url = "https://1c.cityads.com/LF/hs/portal/emploeeimage?id=\(id)"
+        
+        request(url: url) { parsData in
+
+            if let image = UIImage(data: parsData) {
+                    completion(image)
+            }
+        }
     }
    
 }
@@ -68,6 +88,20 @@ struct LoginResponse: Codable {
     enum CodingKeys : String, CodingKey {
         case success = "Success"
         case message = "Message"
+    }
+    
+}
+
+struct EmployeesResponse: Codable {
+    
+    var success : Bool
+    var message : String
+    var data : [EmployeeCodable]
+    
+    enum CodingKeys : String, CodingKey {
+        case success = "Success"
+        case message = "Message"
+        case data = "Data"
     }
     
 }

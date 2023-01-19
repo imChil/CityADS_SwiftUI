@@ -4,11 +4,11 @@ import SwiftUI
 struct MainScreen: View {
     var body: some View {
         TabView() {
-            EmployeesScreen()
-                .tabItem(){
-                    Label("Employees", systemImage: "person")
-                }
-            .tag(0)
+                EmployeesScreen(employeeList: [])
+                    .tabItem(){
+                        Label("Employees", systemImage: "person")
+                    }
+                    .tag(0)
         }
     }
 }

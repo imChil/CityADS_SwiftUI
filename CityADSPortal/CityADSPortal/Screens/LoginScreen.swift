@@ -1,35 +1,39 @@
-//
-//  LoginScreen.swift
-//  CityADSPortal
-//
-//  Created by  Pavel Chilin on 13.12.2022.
-//
 
 import SwiftUI
 
 struct LoginScreen: View {
     
+    private let bio = Biometric()
     @State var login: String = ""
     @State var password: String = ""
     @State var isErrorAnimation: Bool = false
+    @State var pressLogin = false
+    @Binding var isLogin: Bool
+    
     
     var body: some View {
         VStack{
             Spacer()
             Image("CAlogo")
+                .shadow(radius: 3)
             Spacer()
             TextField("Login", text: $login)
-                .modifier(LoginText(isError: $isErrorAnimation))
-            
-            SecureField(text: $password, label: {
-                Label("password", systemImage: "key")
-            })
-            .modifier(LoginText(isError: $isErrorAnimation))
-            .offset(CGSize(width: isErrorAnimation ? 5 : 0, height: 0))
-            LoginButton(login: $login, password: $password, isError: $isErrorAnimation)
+                .modifier(LoginText(isError: $isErrorAnimation, pressLogin: $pressLogin))
+            SecureField("password", text: $password)
+                .modifier(LoginText(isError: $isErrorAnimation, pressLogin: $pressLogin))
+                .offset(CGSize(width: isErrorAnimation ? 5 : 0, height: 0))
+            LoginButton(login: $login,
+                        password: $password,
+                        isError: $isErrorAnimation,
+                        loginSucsses: $isLogin,
+                        pressLogin: $pressLogin)
                 .padding(30)
             Spacer()
             
+        }.onAppear(){
+            bio.authenticate(){ success in
+                isLogin = success
+            }
         }
     }
 }
@@ -39,19 +43,18 @@ struct LoginButton: View {
     @Binding var login: String
     @Binding var password: String
     @Binding var isError: Bool
-    @State var loginSucsses = false
+    @Binding var loginSucsses: Bool
+    @Binding var pressLogin: Bool
     
     let network = NetworkService.shared
     
     var body: some View {
         
         Button("Login") {
+            pressLogin = true
             signIn()
         }
-        .buttonStyle(.bordered)
-        .sheet(isPresented: $loginSucsses) {
-            MainScreen()
-        }
+        .buttonStyle(.borderless)
     }
     
     func signIn() {
@@ -61,6 +64,7 @@ struct LoginButton: View {
                 loginSucsses = true
             case false:
                 let animation = Animation.easeInOut(duration: 0.1).repeatCount(5)
+                pressLogin = false
                 withAnimation(animation) {
                     isError = !result.success
                 }
@@ -70,15 +74,13 @@ struct LoginButton: View {
                     }
                 }
             }
-            
-
-            
         }
     }
 }
 
 struct LoginText: ViewModifier {
     @Binding var isError: Bool
+    @Binding var pressLogin: Bool
     static let screenWidth = UIScreen.main.bounds.size.width
     static let textfildsWidth = screenWidth/1.6  >= 220 ? screenWidth/1.6 : 220
     
@@ -87,7 +89,9 @@ struct LoginText: ViewModifier {
         content
             .frame(width: LoginText.textfildsWidth, height: 30)
             .padding(.leading, 10)
+            .disabled(pressLogin)
             .disableAutocorrection(true)
+            .autocapitalization(/*@START_MENU_TOKEN@*/.none/*@END_MENU_TOKEN@*/)
             .overlay(
                 RoundedRectangle(cornerRadius: 14)
                     .stroke(colorBorder, lineWidth: 2)
@@ -101,8 +105,8 @@ struct LoginText: ViewModifier {
 
 
 //_____________________________________________________________
-struct LoginScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginScreen()
-    }
-}
+//struct LoginScreen_Previews: PreviewProvider {
+//    static var previews: some View {
+//        LoginScreen(isLogin: false)
+//    }
+//}

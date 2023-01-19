@@ -1,19 +1,21 @@
-//
-//  ContentView.swift
-//  CityADSPortal
-//
-//  Created by  Pavel Chilin on 13.12.2022.
-//
 
 import SwiftUI
 
 struct ContentView: View {
     
+    @State var loginSucsses = false
+    
     var body: some View {
-        VStack {
-            LoginScreen()
+        NavigationViewController(
+            transition: .none
+        ) {
+                if loginSucsses {
+                    MainScreen()
+                } else {
+                    LoginScreen(isLogin: $loginSucsses)
+                }
         }
-        .padding()
+        
     }
 }
 

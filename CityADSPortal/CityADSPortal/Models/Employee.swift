@@ -9,6 +9,8 @@ struct EmployeeCodable: Codable {
     let department: String
     let email: String
     let telegram: String
+    let phone: String
+    let skype: String
 }
     
 
@@ -19,7 +21,9 @@ struct Employee: Identifiable {
     let department: String
     let email: String
     let telegram: String
-    var avatar: UIImage? = nil
+    let phone: String
+    let skype: String
+    var avatar: UIImage?
 }
 
 
@@ -28,7 +32,7 @@ func convertEmployeeResult(employeeCodable: [EmployeeCodable]) -> [Employee] {
     var employeeArray : [Employee] = []
     
     for item in employeeCodable {
-        let employee = Employee(id: item.id, name: item.name, jobName: item.jobName, department: item.department, email: item.email, telegram: item.telegram, avatar: nil)
+        let employee = Employee(id: item.id, name: item.name, jobName: item.jobName, department: item.department, email: item.email, telegram: item.telegram, phone: item.phone, skype: item.skype, avatar: nil)
         employeeArray.append(employee)
     }
     

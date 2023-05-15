@@ -2,10 +2,10 @@
 import Foundation
 import SwiftUI
 
-final class Core {
+final class ImageService: ObservableObject {
     
-    let fileManager = StorageManager()
-    let networkService = NetworkService.shared
+    private let fileManager = StorageManager()
+    private let networkService = NetworkService()
     
     func getImage(id: String, completion: @escaping (UIImage) -> Void) {
         
@@ -16,7 +16,9 @@ final class Core {
                 if let dataImage = image.pngData() {
                     self?.fileManager.saveImage(id: id, image: dataImage)
                 }
-                completion(image)
+                DispatchQueue.main.async {
+                    completion(image)
+                }
             }
             
         }

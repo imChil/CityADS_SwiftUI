@@ -20,7 +20,7 @@
 		47D57A122968BBF900BDCB80 /* Employee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A112968BBF900BDCB80 /* Employee.swift */; };
 		47D57A142968C10500BDCB80 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A132968C10500BDCB80 /* Extensions.swift */; };
 		47D57A16296AC7CA00BDCB80 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A15296AC7CA00BDCB80 /* FileManager.swift */; };
-		47D57A18296ACBCC00BDCB80 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A17296ACBCC00BDCB80 /* Core.swift */; };
+		47D57A18296ACBCC00BDCB80 /* EmployeeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A17296ACBCC00BDCB80 /* EmployeeService.swift */; };
 		47D57A1F296DF7A300BDCB80 /* AnimationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A1E296DF7A300BDCB80 /* AnimationType.swift */; };
 		47D57A25296DF82100BDCB80 /* NavigationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A20296DF82100BDCB80 /* NavigationType.swift */; };
 		47D57A26296DF82100BDCB80 /* NavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A21296DF82100BDCB80 /* NavigationViewController.swift */; };
@@ -28,7 +28,18 @@
 		47D57A28296DF82100BDCB80 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A23296DF82100BDCB80 /* Screen.swift */; };
 		47D57A29296DF82100BDCB80 /* NavigationStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A24296DF82100BDCB80 /* NavigationStack.swift */; };
 		47D57A2B2975A16100BDCB80 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A2A2975A16100BDCB80 /* SearchBar.swift */; };
-		47D57A2E2976FB7400BDCB80 /* Biometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A2D2976FB7400BDCB80 /* Biometric.swift */; };
+		47D57A2E2976FB7400BDCB80 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47D57A2D2976FB7400BDCB80 /* AuthenticationManager.swift */; };
+		47DEC6E829B259B5004C2227 /* MDPModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6E729B259B5004C2227 /* MDPModel.swift */; };
+		47DEC6EC29B25AB8004C2227 /* MDPMonthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6EB29B25AB8004C2227 /* MDPMonthView.swift */; };
+		47DEC6EE29B25AE3004C2227 /* MDPContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6ED29B25AE3004C2227 /* MDPContentView.swift */; };
+		47DEC6F029B25B06004C2227 /* MDPDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6EF29B25B06004C2227 /* MDPDayView.swift */; };
+		47DEC6F229B25BF9004C2227 /* MDPMonthYearPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6F129B25BF9004C2227 /* MDPMonthYearPicker.swift */; };
+		47DEC6F429B25C1E004C2227 /* MDPMonthYearPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6F329B25C1E004C2227 /* MDPMonthYearPickerButton.swift */; };
+		47DEC6F729B25CAE004C2227 /* MultiDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6F629B25CAE004C2227 /* MultiDatePicker.swift */; };
+		47DEC6F929B2616C004C2227 /* VacationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6F829B2616C004C2227 /* VacationScreen.swift */; };
+		47DEC6FB29B69377004C2227 /* VacationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6FA29B69377004C2227 /* VacationCell.swift */; };
+		47E2F6732A053B6A000F3C8A /* Vacations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2F6722A053B6A000F3C8A /* Vacations.swift */; };
+		47E2F6752A06CC3D000F3C8A /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2F6742A06CC3D000F3C8A /* ImageService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,7 +57,7 @@
 		47D57A112968BBF900BDCB80 /* Employee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Employee.swift; sourceTree = "<group>"; };
 		47D57A132968C10500BDCB80 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		47D57A15296AC7CA00BDCB80 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
-		47D57A17296ACBCC00BDCB80 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		47D57A17296ACBCC00BDCB80 /* EmployeeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeService.swift; sourceTree = "<group>"; };
 		47D57A1E296DF7A300BDCB80 /* AnimationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationType.swift; sourceTree = "<group>"; };
 		47D57A20296DF82100BDCB80 /* NavigationType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationType.swift; sourceTree = "<group>"; };
 		47D57A21296DF82100BDCB80 /* NavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationViewController.swift; sourceTree = "<group>"; };
@@ -54,7 +65,18 @@
 		47D57A23296DF82100BDCB80 /* Screen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		47D57A24296DF82100BDCB80 /* NavigationStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationStack.swift; sourceTree = "<group>"; };
 		47D57A2A2975A16100BDCB80 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
-		47D57A2D2976FB7400BDCB80 /* Biometric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometric.swift; sourceTree = "<group>"; };
+		47D57A2D2976FB7400BDCB80 /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		47DEC6E729B259B5004C2227 /* MDPModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPModel.swift; sourceTree = "<group>"; };
+		47DEC6EB29B25AB8004C2227 /* MDPMonthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPMonthView.swift; sourceTree = "<group>"; };
+		47DEC6ED29B25AE3004C2227 /* MDPContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPContentView.swift; sourceTree = "<group>"; };
+		47DEC6EF29B25B06004C2227 /* MDPDayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPDayView.swift; sourceTree = "<group>"; };
+		47DEC6F129B25BF9004C2227 /* MDPMonthYearPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPMonthYearPicker.swift; sourceTree = "<group>"; };
+		47DEC6F329B25C1E004C2227 /* MDPMonthYearPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDPMonthYearPickerButton.swift; sourceTree = "<group>"; };
+		47DEC6F629B25CAE004C2227 /* MultiDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiDatePicker.swift; sourceTree = "<group>"; };
+		47DEC6F829B2616C004C2227 /* VacationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationScreen.swift; sourceTree = "<group>"; };
+		47DEC6FA29B69377004C2227 /* VacationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationCell.swift; sourceTree = "<group>"; };
+		47E2F6722A053B6A000F3C8A /* Vacations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vacations.swift; sourceTree = "<group>"; };
+		47E2F6742A06CC3D000F3C8A /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,12 +112,12 @@
 				4734473D2948E6C400776BC1 /* Assets.xcassets */,
 				473447392948E6C300776BC1 /* CityADSPortalApp.swift */,
 				4734473B2948E6C300776BC1 /* ContentView.swift */,
+				4734474F2948E83600776BC1 /* Moduls */,
+				473447472948E72C00776BC1 /* Screens */,
 				47D57A2C2975CB8300BDCB80 /* ViewElements */,
 				47D57A1D296DF6D400BDCB80 /* NavigationStack */,
 				4734474E2948E7E700776BC1 /* Models */,
-				4734474F2948E83600776BC1 /* Moduls */,
 				4734473F2948E6C400776BC1 /* Preview Content */,
-				473447472948E72C00776BC1 /* Screens */,
 			);
 			path = CityADSPortal;
 			sourceTree = "<group>";
@@ -114,6 +136,7 @@
 				473447532958B35B00776BC1 /* MainScreen.swift */,
 				473447482948E75A00776BC1 /* LoginScreen.swift */,
 				47D57A0E2968B6E600BDCB80 /* Employee */,
+				47DEC6E429B2502D004C2227 /* Vacation */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -122,6 +145,8 @@
 			isa = PBXGroup;
 			children = (
 				47D57A112968BBF900BDCB80 /* Employee.swift */,
+				47E2F6722A053B6A000F3C8A /* Vacations.swift */,
+				47DEC6E729B259B5004C2227 /* MDPModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -129,9 +154,10 @@
 		4734474F2948E83600776BC1 /* Moduls */ = {
 			isa = PBXGroup;
 			children = (
-				47D57A17296ACBCC00BDCB80 /* Core.swift */,
+				47D57A17296ACBCC00BDCB80 /* EmployeeService.swift */,
+				47E2F6742A06CC3D000F3C8A /* ImageService.swift */,
 				4734475029548A2E00776BC1 /* Network.swift */,
-				47D57A2D2976FB7400BDCB80 /* Biometric.swift */,
+				47D57A2D2976FB7400BDCB80 /* AuthenticationManager.swift */,
 				47D57A15296AC7CA00BDCB80 /* FileManager.swift */,
 				47D57A132968C10500BDCB80 /* Extensions.swift */,
 			);
@@ -167,6 +193,29 @@
 				47D57A2A2975A16100BDCB80 /* SearchBar.swift */,
 			);
 			path = ViewElements;
+			sourceTree = "<group>";
+		};
+		47DEC6E429B2502D004C2227 /* Vacation */ = {
+			isa = PBXGroup;
+			children = (
+				47DEC6F829B2616C004C2227 /* VacationScreen.swift */,
+				47DEC6FA29B69377004C2227 /* VacationCell.swift */,
+				47DEC6F629B25CAE004C2227 /* MultiDatePicker.swift */,
+				47DEC6F529B25C7A004C2227 /* MDPComponents */,
+			);
+			path = Vacation;
+			sourceTree = "<group>";
+		};
+		47DEC6F529B25C7A004C2227 /* MDPComponents */ = {
+			isa = PBXGroup;
+			children = (
+				47DEC6EB29B25AB8004C2227 /* MDPMonthView.swift */,
+				47DEC6ED29B25AE3004C2227 /* MDPContentView.swift */,
+				47DEC6EF29B25B06004C2227 /* MDPDayView.swift */,
+				47DEC6F129B25BF9004C2227 /* MDPMonthYearPicker.swift */,
+				47DEC6F329B25C1E004C2227 /* MDPMonthYearPickerButton.swift */,
+			);
+			path = MDPComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,26 +288,37 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47DEC6F029B25B06004C2227 /* MDPDayView.swift in Sources */,
+				47DEC6E829B259B5004C2227 /* MDPModel.swift in Sources */,
 				47D57A27296DF82100BDCB80 /* NavigationViewModel.swift in Sources */,
 				4734473C2948E6C300776BC1 /* ContentView.swift in Sources */,
 				47D57A122968BBF900BDCB80 /* Employee.swift in Sources */,
 				4734473A2948E6C300776BC1 /* CityADSPortalApp.swift in Sources */,
 				47D57A26296DF82100BDCB80 /* NavigationViewController.swift in Sources */,
+				47DEC6F729B25CAE004C2227 /* MultiDatePicker.swift in Sources */,
+				47DEC6EE29B25AE3004C2227 /* MDPContentView.swift in Sources */,
 				4734475129548A2E00776BC1 /* Network.swift in Sources */,
+				47DEC6F229B25BF9004C2227 /* MDPMonthYearPicker.swift in Sources */,
 				4734474D2948E7B100776BC1 /* EmployeeCardScreen.swift in Sources */,
 				47D57A1F296DF7A300BDCB80 /* AnimationType.swift in Sources */,
 				47D57A142968C10500BDCB80 /* Extensions.swift in Sources */,
-				47D57A18296ACBCC00BDCB80 /* Core.swift in Sources */,
+				47D57A18296ACBCC00BDCB80 /* EmployeeService.swift in Sources */,
 				473447492948E75A00776BC1 /* LoginScreen.swift in Sources */,
+				47E2F6732A053B6A000F3C8A /* Vacations.swift in Sources */,
 				47D57A16296AC7CA00BDCB80 /* FileManager.swift in Sources */,
-				47D57A2E2976FB7400BDCB80 /* Biometric.swift in Sources */,
+				47E2F6752A06CC3D000F3C8A /* ImageService.swift in Sources */,
+				47D57A2E2976FB7400BDCB80 /* AuthenticationManager.swift in Sources */,
+				47DEC6EC29B25AB8004C2227 /* MDPMonthView.swift in Sources */,
 				47D57A102968B71800BDCB80 /* EmployeeCell.swift in Sources */,
 				47D57A25296DF82100BDCB80 /* NavigationType.swift in Sources */,
 				47D57A28296DF82100BDCB80 /* Screen.swift in Sources */,
 				47D57A2B2975A16100BDCB80 /* SearchBar.swift in Sources */,
 				4734474B2948E77500776BC1 /* EmployeesScreen.swift in Sources */,
 				47D57A29296DF82100BDCB80 /* NavigationStack.swift in Sources */,
+				47DEC6F429B25C1E004C2227 /* MDPMonthYearPickerButton.swift in Sources */,
+				47DEC6F929B2616C004C2227 /* VacationScreen.swift in Sources */,
 				473447542958B35B00776BC1 /* MainScreen.swift in Sources */,
+				47DEC6FB29B69377004C2227 /* VacationCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

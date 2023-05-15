@@ -21,10 +21,10 @@ struct EmployeeCardScreen: View {
                 VStack{
                     Text(employee.name)
                         .lineLimit(2)
-                        .font(.title)
+                        .font(.title2)
                         .padding(5)
                     Text(employee.jobName)
-                        .font(.title2)
+                        .font(.title3)
                         .foregroundColor(.gray)
                         .shadow(radius: 1)
                 }
@@ -32,16 +32,15 @@ struct EmployeeCardScreen: View {
             VStack(alignment: .leading){
                 HStack {Text("Office:")
                     Text(employee.department)}
-                //            HStack {Text("Chief:")
-                //                Text(employee.)}
-                //            HStack {Text("Phone:")
-                //                Text(employee.)}
+                HStack {Text("Phone:")
+                        Text(employee.phone)}
                 HStack {Text("Email:")
                     Text(employee.email)}
                 HStack {Text("Telegram:")
                     Text(employee.telegram)}
                 Text("Bithday")
             }
+            .padding(10)
             Spacer()
         }.padding(10)
     }
@@ -54,7 +53,7 @@ struct EmployeeCardScreen: View {
 
 struct EmployeeCardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram")
+        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram", phone: "79253596165", skype: "")
         EmployeeCardScreen(employee: employee)
     }
 }

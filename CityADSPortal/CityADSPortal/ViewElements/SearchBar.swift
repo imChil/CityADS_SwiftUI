@@ -23,15 +23,15 @@ struct SearchBar: View {
                     .padding(.leading, 20)
 
                     Button(action: {
-                        text = ""
-                        isEditing = false
+                        self.text = ""
+                        self.isEditing = false
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }) {
                         Image(systemName: "multiply.circle.fill")
                             .foregroundColor(.gray)
                     }
                     .padding(.trailing, 20)
-                    .opacity(isEditing || text != "" ? 1 : 0)
+                    .opacity(isEditing && text != "" ? 1 : 0)
             }
         )
     }

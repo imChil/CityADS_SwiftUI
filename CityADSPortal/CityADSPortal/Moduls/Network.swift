@@ -19,11 +19,11 @@ class NTLMAuthenticationSessionTaskDelegate : NSObject, URLSessionTaskDelegate {
 }
 
 
-final class NetworkService: ObservableObject {
+final class NetworkService {
     
     static let shared = NetworkService()
     
-    private var session = URLSession(configuration: URLSessionConfiguration.default, delegate: NTLMAuthenticationSessionTaskDelegate(user:"p.chilin", password:"Chil66621*"), delegateQueue: nil)
+    private var session = URLSession(configuration: URLSessionConfiguration.default, delegate: NTLMAuthenticationSessionTaskDelegate(user:"p.chilin", password:"Chil66621)"), delegateQueue: nil)
     
     private func request(url: String, completion: @escaping (Data) -> Void) {
         
@@ -65,6 +65,17 @@ final class NetworkService: ObservableObject {
         }
     }
     
+    func getVacations(id: String, completion: @escaping (VacationsResponse) -> Void) {
+        
+        let url = "https://1c.cityads.com/LF/hs/portal/vacations?id=\(id)"
+        
+        request(url: url) { parsData in
+            if let result = try? JSONDecoder().decode(VacationsResponse.self, from: parsData) {
+                    completion(result)
+            }
+        }
+    }
+    
     func getImage(id: String, completion: @escaping (UIImage) -> Void) {
         
         let url = "https://1c.cityads.com/LF/hs/portal/emploeeimage?id=\(id)"
@@ -84,10 +95,12 @@ struct LoginResponse: Codable {
     
     var success : Bool
     var message : String
+    var id : String
     
     enum CodingKeys : String, CodingKey {
         case success = "Success"
         case message = "Message"
+        case id = "ID"
     }
     
 }
@@ -97,6 +110,20 @@ struct EmployeesResponse: Codable {
     var success : Bool
     var message : String
     var data : [EmployeeCodable]
+    
+    enum CodingKeys : String, CodingKey {
+        case success = "Success"
+        case message = "Message"
+        case data = "Data"
+    }
+    
+}
+
+struct VacationsResponse: Codable {
+    
+    var success : Bool
+    var message : String
+    var data : VacationsResult
     
     enum CodingKeys : String, CodingKey {
         case success = "Success"

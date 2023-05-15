@@ -3,13 +3,12 @@ import SwiftUI
 
 struct LoginScreen: View {
     
-    private let bio = Biometric()
+    @EnvironmentObject var authManager : AuthenticationManager
     @State var login: String = ""
     @State var password: String = ""
     @State var isErrorAnimation: Bool = false
     @State var pressLogin = false
-    @Binding var isLogin: Bool
-    
+    @State var isShowMessageError = false
     
     var body: some View {
         VStack{
@@ -17,22 +16,53 @@ struct LoginScreen: View {
             Image("CAlogo")
                 .shadow(radius: 3)
             Spacer()
-            TextField("Login", text: $login)
+            TextField("Login", text: $authManager.credentials.username)
                 .modifier(LoginText(isError: $isErrorAnimation, pressLogin: $pressLogin))
-            SecureField("password", text: $password)
+            SecureField("password", text: $authManager.credentials.password)
                 .modifier(LoginText(isError: $isErrorAnimation, pressLogin: $pressLogin))
                 .offset(CGSize(width: isErrorAnimation ? 5 : 0, height: 0))
-            LoginButton(login: $login,
-                        password: $password,
+            if pressLogin {
+                ProgressView()
+            }
+            Text(authManager.errorDescription ?? "")
+                .opacity(isShowMessageError ? 1 : 0)
+                .foregroundColor(.red)
+            LoginButton(login: $authManager.credentials.username,
+                        password: $authManager.credentials.password,
                         isError: $isErrorAnimation,
-                        loginSucsses: $isLogin,
+                        isShowMessageError: $isShowMessageError,
                         pressLogin: $pressLogin)
-                .padding(30)
+            .padding(30)
+            if authManager.isSavedCredential {
+                switch authManager.biometryType {
+                case .faceID:
+                    Image(systemName: "faceid")
+                        .foregroundColor(Color("DigitalCYAN"))
+                        .onTapGesture {
+                            Task.init {
+                                await authManager.authenticateWithBiometrics()
+                            }
+                        }
+                case .touchID:
+                    Image(systemName: "touchid")
+                        .foregroundColor(Color("DigitalCYAN"))
+                        .onTapGesture {
+                            Task.init {
+                                await authManager.authenticateWithBiometrics()
+                            }
+                        }
+                default:
+                    Text("")
+                }
+            }
             Spacer()
             
-        }.onAppear(){
-            bio.authenticate(){ success in
-                isLogin = success
+        }
+        .onAppear(){
+            Task.init {
+                if authManager.isSavedCredential {
+                    await authManager.authenticateWithBiometrics()
+                }
             }
         }
     }
@@ -40,42 +70,51 @@ struct LoginScreen: View {
 
 struct LoginButton: View {
     
+    @EnvironmentObject var authManager: AuthenticationManager
     @Binding var login: String
     @Binding var password: String
     @Binding var isError: Bool
-    @Binding var loginSucsses: Bool
+    @Binding var isShowMessageError: Bool
     @Binding var pressLogin: Bool
     
-    let network = NetworkService.shared
     
     var body: some View {
         
         Button("Login") {
             pressLogin = true
             signIn()
+
         }
         .buttonStyle(.borderless)
+        
     }
     
     func signIn() {
-        network.login(login: login, password: password) {result in
-            switch result.success {
-            case true :
-                loginSucsses = true
-            case false:
-                let animation = Animation.easeInOut(duration: 0.1).repeatCount(5)
-                pressLogin = false
-                withAnimation(animation) {
-                    isError = !result.success
+        authManager.authenticateWithCredentials() {
+            if authManager.showError {
+                let animationShake = Animation.easeInOut(duration: 0.1).repeatCount(5)
+                let animationSlowApeare = Animation.linear(duration: 1.5)
+                withAnimation(animationShake) {
+                    isError = true
+                }
+                withAnimation(animationSlowApeare) {
+                    isShowMessageError = true
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     withAnimation(.easeInOut) {
                         isError = false
                     }
                 }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.6) {
+                    withAnimation(animationSlowApeare) {
+                        isShowMessageError = false
+                    }
+                }
             }
+            pressLogin = false
         }
     }
+
 }
 
 struct LoginText: ViewModifier {
@@ -105,8 +144,9 @@ struct LoginText: ViewModifier {
 
 
 //_____________________________________________________________
-//struct LoginScreen_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LoginScreen(isLogin: false)
-//    }
-//}
+struct LoginScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        LoginScreen()
+            .environmentObject(AuthenticationManager())
+    }
+}

@@ -7,7 +7,7 @@ import SwiftUI
  */
 struct MDPDayView: View {
     @EnvironmentObject var monthDataModel: MDPModel
-    let cellSize: CGFloat = 30
+    let cellSize: CGFloat = 35
     var dayOfMonth: MDPDayOfMonth
     
     // outline "today"
@@ -35,7 +35,7 @@ struct MDPDayView: View {
     
     private func handleSelection() {
         if dayOfMonth.isSelectable {
-//            monthDataModel.selectDay(dayOfMonth)
+            monthDataModel.selectDay(dayOfMonth)
         }
     }
     
@@ -48,7 +48,7 @@ struct MDPDayView: View {
                 .frame(minHeight: cellSize, maxHeight: cellSize)
                 .background(
                     Circle()
-                        .stroke(strokeColor, lineWidth: 1)
+                        .stroke(strokeColor, lineWidth: 1.4)
                         .background(Circle().foregroundColor(fillColor))
                         .frame(width: cellSize, height: cellSize)
                 )

@@ -14,7 +14,6 @@ struct EmployeeCell: View {
                 .clipShape(Circle())
                 .overlay(Circle().stroke(Color("DigitalCYAN"), lineWidth: 4))
                 .padding(.horizontal, 5)
-//                .shadow(radius: 5)
                 
             VStack(alignment: .leading) {
                 Text(employeeData.name)
@@ -27,7 +26,6 @@ struct EmployeeCell: View {
                     .font(.callout)
             }
             .padding(.horizontal, 2)
-//            .shadow(radius: 2)
         }.onTapGesture(){
             withAnimation(.spring()){
                 showDetail.toggle()

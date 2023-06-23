@@ -77,7 +77,7 @@ final class AuthenticationManager: ObservableObject {
             case true :
                 DispatchQueue.main.async {
                     self?.isAuthenticated = true
-                    self?.showAlertBio = !(self?.isSavedCredential ?? false) || self?.biometryType == LABiometryType.none
+                    self?.showAlertBio = !(self?.isSavedCredential ?? false) || self?.biometryType == LABiometryType.none || self?.credentials.username != self?.savedCredentials.username || self?.credentials.password != self?.savedCredentials.password
                     self?.idUser = result.id
                     completion()
                 }
@@ -102,20 +102,36 @@ final class AuthenticationManager: ObservableObject {
         
         let account = credentials.username
         let password = credentials.password.data(using: String.Encoding.utf8)!
-        let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
+        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
                                     kSecAttrAccount as String: account,
-                                    kSecAttrServer as String: AuthenticationManager.server,
                                     kSecValueData as String: password]
         
         let status = SecItemAdd(query as CFDictionary, nil)
+        
+        if status == errSecDuplicateItem {
+            
+            let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
+                                        kSecAttrAccount as String: account]
+            let attributes: [String: AnyObject] = [
+                    kSecValueData as String: password as AnyObject
+                ]
+            let status = SecItemUpdate(
+                    query as CFDictionary,
+                    attributes as CFDictionary
+                )
+            guard status != errSecItemNotFound else {
+                    throw KeychainError.noPassword
+                }
+        }
+        
+        
         guard status == errSecSuccess else { throw KeychainError.unhandledError(status: status) }
         
     }
     
     private func getFromKeyChain() throws -> Credentials  {
         
-        let query: [String: Any] = [kSecClass as String: kSecClassInternetPassword,
-                                    kSecAttrServer as String: AuthenticationManager.server,
+        let query: [String: Any] = [kSecClass as String: kSecClassGenericPassword,
                                     kSecMatchLimit as String: kSecMatchLimitOne,
                                     kSecReturnAttributes as String: true,
                                     kSecReturnData as String: true]

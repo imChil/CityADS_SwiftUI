@@ -5,6 +5,7 @@ struct VacationCell: View {
     var avatar: UIImage?
     let start: Date
     let end: Date
+    @EnvironmentObject var monthDataModel: MDPModel
     
     var body: some View {
         HStack{
@@ -19,6 +20,12 @@ struct VacationCell: View {
             Text(" - ")
             Text(FormateStringFromDate(date: end))
         }
+        .onTapGesture {
+            withAnimation(){
+                monthDataModel.selections.removeAll()
+                monthDataModel.selections = [start, end]
+            }
+        }
         
     }
     
@@ -26,7 +33,7 @@ struct VacationCell: View {
         let formater = DateFormatter()
         formater.dateStyle = .short
         formater.timeStyle = .none
-        formater.dateFormat = "dd-MM-yyyy"
+        formater.dateFormat = "dd.MM.yyyy"
         return formater.string(from: date)
     }
     
@@ -38,5 +45,6 @@ struct VacationCell: View {
 struct VacationCell_Previews: PreviewProvider {
     static var previews: some View {
         VacationCell(start: Date(), end: Date())
+            .environmentObject(MDPModel())
     }
 }

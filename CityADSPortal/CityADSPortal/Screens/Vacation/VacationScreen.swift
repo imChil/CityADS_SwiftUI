@@ -4,26 +4,11 @@ import SwiftUI
 struct VacationScreen: View {
     
     let id: String
-    @State var vacations = [Vacation]()
-    @State var manyDates = [Date]()
-    @State var daysCount = 0
+    @State var dateRange: ClosedRange<Date>? = nil
+
     
     var body: some View {
-        VStack{
-            Text(String(daysCount))
-            MultiDatePicker(anyDays: $manyDates)
-            List{
-                ForEach(vacations) { vacation in
-                    VacationCell(avatar: vacation.avatar, start: vacation.start, end: vacation.end)
-                }
-            }
-            .onAppear(){
-                NetworkService.shared.getVacations(id: id) {result in
-                    self.daysCount = result.data.countDays
-                    self.vacations = convertVacationResult(vacationsCodable: result.data.vacations)
-                }
-            }
-        }
+        MultiDatePicker(id: id, dateRange: $dateRange, minDate: Date().dayBefore)
     }
 }
 

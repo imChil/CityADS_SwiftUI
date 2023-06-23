@@ -14,14 +14,16 @@ struct VacationsResult: Codable {
     
 
 struct VacationCodable: Identifiable, Codable {
-    let id: String
+    let id: Int
+    let idEmployee: String
     let start: String
     let end: String
     
 }
 
 struct Vacation: Identifiable {
-    let id: String
+    let id: Int
+    let idEmployee: String
     let start: Date
     let end: Date
     var avatar: UIImage?
@@ -34,8 +36,8 @@ func convertVacationResult(vacationsCodable: [VacationCodable]) -> [Vacation] {
     var vacationsArray : [Vacation] = []
     
     for item in vacationsCodable {
-        var vacation = Vacation(id: item.id, start: DateFromString(item.start), end: DateFromString(item.end))
-        imageManager.getImage(id: item.id) { avatar in
+        var vacation = Vacation(id: item.id, idEmployee: item.idEmployee, start: DateFromString(item.start), end: DateFromString(item.end))
+        imageManager.getImage(id: item.idEmployee) { avatar in
             vacation.avatar = avatar
         }
         vacationsArray.append(vacation)

@@ -24,3 +24,4 @@ struct TabBar_Previews: PreviewProvider {
         MainScreen(idUser: "88f485c2-0c5f-11eb-80b6-00155d043f13")
     }
 }
+

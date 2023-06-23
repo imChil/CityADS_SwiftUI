@@ -4,8 +4,6 @@ import SwiftUI
 struct LoginScreen: View {
     
     @EnvironmentObject var authManager : AuthenticationManager
-    @State var login: String = ""
-    @State var password: String = ""
     @State var isErrorAnimation: Bool = false
     @State var pressLogin = false
     @State var isShowMessageError = false
@@ -27,9 +25,7 @@ struct LoginScreen: View {
             Text(authManager.errorDescription ?? "")
                 .opacity(isShowMessageError ? 1 : 0)
                 .foregroundColor(.red)
-            LoginButton(login: $authManager.credentials.username,
-                        password: $authManager.credentials.password,
-                        isError: $isErrorAnimation,
+            LoginButton(isError: $isErrorAnimation,
                         isShowMessageError: $isShowMessageError,
                         pressLogin: $pressLogin)
             .padding(30)
@@ -71,8 +67,6 @@ struct LoginScreen: View {
 struct LoginButton: View {
     
     @EnvironmentObject var authManager: AuthenticationManager
-    @Binding var login: String
-    @Binding var password: String
     @Binding var isError: Bool
     @Binding var isShowMessageError: Bool
     @Binding var pressLogin: Bool

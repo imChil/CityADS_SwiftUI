@@ -11,13 +11,13 @@ struct MDPContentView: View {
     let cellSize: CGFloat = 30
     
     let columns = [
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2),
-        GridItem(.fixed(30), spacing: 2)
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2),
+        GridItem(.fixed(42), spacing: 2)
     ]
     
     var body: some View {

@@ -32,7 +32,15 @@ func convertEmployeeResult(employeeCodable: [EmployeeCodable]) -> [Employee] {
     var employeeArray : [Employee] = []
     
     for item in employeeCodable {
-        let employee = Employee(id: item.id, name: item.name, jobName: item.jobName, department: item.department, email: item.email, telegram: item.telegram, phone: item.phone, skype: item.skype, avatar: nil)
+        let employee = Employee(id: item.id,
+                                name: item.name,
+                                jobName: item.jobName,
+                                department: item.department,
+                                email: item.email,
+                                telegram: item.telegram,
+                                phone: item.phone,
+                                skype: item.skype,
+                                avatar: nil)
         employeeArray.append(employee)
     }
     

@@ -34,6 +34,7 @@ class MDPModel: NSObject, ObservableObject {
     // this array maintains the selections. for a single date it is an array of 1. for many
     // dates it is an array of those dates. for a date range, it is an array of 2.
     @Published var selections = [Date]()
+    @Published var availableDays = 0
     
     // the localized days of the week
     let dayNames = Calendar.current.shortWeekdaySymbols
@@ -49,7 +50,7 @@ class MDPModel: NSObject, ObservableObject {
     private var maxDate: Date? = nil
     
     // the type of date picker
-    private var pickerType: MultiDatePicker.PickerType = .singleDay
+    private var pickerType: MultiDatePicker.PickerType = .anyDays
     
     // which days are available for selection
     private var selectionType: MultiDatePicker.DateSelectionChoices = .allDays
@@ -148,16 +149,18 @@ class MDPModel: NSObject, ObservableObject {
         // if the selection has 1 element, it completes the range else it starts
         // a new range
         default:
-            if selections.count != 1 {
-                selections = [date]
-            } else {
-                selections.append(date)
-            }
-            selections.sort()
-            if selections.count == 2 {
-                dateRangeWrapper?.wrappedValue = selections[0]...selections[1]
-            } else {
-                dateRangeWrapper?.wrappedValue = nil
+            withAnimation() {
+                if selections.count != 1 {
+                    selections = [date]
+                } else {
+                    selections.append(date)
+                }
+                selections.sort()
+                if selections.count == 2 {
+                    dateRangeWrapper?.wrappedValue = selections[0]...selections[1]
+                } else {
+                    dateRangeWrapper?.wrappedValue = nil
+                }
             }
         }
     }

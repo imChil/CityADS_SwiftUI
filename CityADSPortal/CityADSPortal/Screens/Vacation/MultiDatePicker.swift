@@ -43,42 +43,138 @@ struct MultiDatePicker: View {
         case weekdaysOnly
     }
     
+    let id: String
+    let imageManager = ImageService()
+    let calendar = Calendar.current
+    let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+    
     @StateObject var monthModel: MDPModel
-        
+    @State var vacations = [Vacation]()
+    @State private var startAnimation = false
+    @State private var scale: CGFloat = 1
+    
+    
+    private var availibleDays: Int {
+        guard let start = monthModel.selections.first else { return monthModel.availableDays}
+        guard let end = monthModel.selections.last else { return monthModel.availableDays}
+        let d = (calendar.dateComponents([.day], from: start, to: end).day ?? 0)  + 1
+        return startAnimation ? monthModel.availableDays - d : monthModel.availableDays
+    }
+    
     // selects only a single date
     
-    init(singleDay: Binding<Date>,
+    init(id: String,
+         singleDay: Binding<Date>,
          includeDays: DateSelectionChoices = .allDays,
          minDate: Date? = nil,
          maxDate: Date? = nil
     ) {
+        self.id = id
         _monthModel = StateObject(wrappedValue: MDPModel(singleDay: singleDay, includeDays: includeDays, minDate: minDate, maxDate: maxDate))
     }
     
     // selects any number of dates, non-contiguous
     
-    init(anyDays: Binding<[Date]>,
+    init(id: String,
+         anyDays: Binding<[Date]>,
          includeDays: DateSelectionChoices = .allDays,
          minDate: Date? = nil,
          maxDate: Date? = nil
     ) {
+        self.id = id
         _monthModel = StateObject(wrappedValue: MDPModel(anyDays: anyDays, includeDays: includeDays, minDate: minDate, maxDate: maxDate))
     }
     
     // selects a closed date range
     
-    init(dateRange: Binding<ClosedRange<Date>?>,
+    init(id: String,
+         dateRange: Binding<ClosedRange<Date>?>,
          includeDays: DateSelectionChoices = .allDays,
          minDate: Date? = nil,
          maxDate: Date? = nil
     ) {
+        self.id = id
         _monthModel = StateObject(wrappedValue: MDPModel(dateRange: dateRange, includeDays: includeDays, minDate: minDate, maxDate: maxDate))
     }
     
     var body: some View {
-        MDPMonthView()
-            .environmentObject(monthModel)
+        
+        VStack{
+            HStack{
+                Spacer()
+                Color.clear
+                    .frame(width: 25, height: 25)
+                    .padding(12)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(.green, lineWidth: 4))
+                    .animatingOverlay(for: availibleDays)
+                    .padding(.horizontal, 20)
+                    .scaleEffect(scale)
+                    .animation(.spring(), value: scale)
+                    .onTapGesture(perform: someAnimation)
+                    .onReceive(timer) { _ in
+                        if startAnimation {
+                            scale = scale == 1.3 ? 1 : 1.3
+                        } else {
+                            scale = 1
+                        }
+                    }
+            }
+            
+            MDPMonthView()
+                .environmentObject(monthModel)
+            
+            HStack {
+                Button("OK") {
+                    cteateNewVacation()
+                    someAnimation()
+                }
+                Button("Cancel") {
+                    someAnimation()
+                }
+            }
+            .opacity(startAnimation && monthModel.selections.count>0 ? 1 : 0)
+            .animation(.spring())
+            
+            List{
+                ForEach(vacations) { vacation in
+                    if calendar.component(.month, from: monthModel.controlDate) == calendar.component(.month, from: vacation.start) || calendar.component(.month, from: monthModel.controlDate) == calendar.component(.month, from: vacation.end) {
+                        VacationCell(avatar: vacation.avatar, start: vacation.start, end: vacation.end)
+                            .environmentObject(monthModel)
+                    }
+                }
+            }
+            
+            .onAppear(){
+                NetworkService.shared.getVacations(id: id) {result in
+                    DispatchQueue.main.async {
+                        self.monthModel.availableDays = result.data.countDays
+                        self.vacations = convertVacationResult(vacationsCodable: result.data.vacations)
+                    }
+                }
+            }
+        }
     }
+    
+    private func someAnimation() {
+        startAnimation.toggle()
+        monthModel.selections.removeAll()
+    }
+    
+    private func cteateNewVacation() {
+        
+        guard let start = monthModel.selections.first else { return }
+        guard let end = monthModel.selections.last else { return }
+        
+        var vacation = Vacation(id: self.vacations.count+1, idEmployee: id, start: start, end: end)
+        imageManager.getImage(id: id) { avatar in
+            vacation.avatar = avatar
+        }
+        self.vacations.append(vacation)
+        self.monthModel.availableDays = availibleDays
+        
+    }
+    
 }
 
 struct MultiDatePicker_Previews: PreviewProvider {
@@ -89,9 +185,9 @@ struct MultiDatePicker_Previews: PreviewProvider {
     static var previews: some View {
         ScrollView {
             VStack {
-                MultiDatePicker(singleDay: $oneDay, includeDays: .weekdaysOnly)
-                MultiDatePicker(anyDays: $manyDates)
-                MultiDatePicker(dateRange: $dateRange)
+                MultiDatePicker(id: "e8f865a3-a66e-11eb-80bc-00155d043f13", singleDay: $oneDay, includeDays: .weekdaysOnly)
+                MultiDatePicker(id: "e8f865a3-a66e-11eb-80bc-00155d043f13", anyDays: $manyDates)
+                MultiDatePicker(id: "e8f865a3-a66e-11eb-80bc-00155d043f13", dateRange: $dateRange)
             }
         }
     }

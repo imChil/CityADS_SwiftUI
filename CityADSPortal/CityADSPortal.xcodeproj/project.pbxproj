@@ -40,6 +40,8 @@
 		47DEC6FB29B69377004C2227 /* VacationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47DEC6FA29B69377004C2227 /* VacationCell.swift */; };
 		47E2F6732A053B6A000F3C8A /* Vacations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2F6722A053B6A000F3C8A /* Vacations.swift */; };
 		47E2F6752A06CC3D000F3C8A /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47E2F6742A06CC3D000F3C8A /* ImageService.swift */; };
+		47F78B362A3F63730032F173 /* AnimatableNumber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F78B352A3F63730032F173 /* AnimatableNumber.swift */; };
+		47F78B382A4081A60032F173 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F78B372A4081A60032F173 /* Login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +79,8 @@
 		47DEC6FA29B69377004C2227 /* VacationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VacationCell.swift; sourceTree = "<group>"; };
 		47E2F6722A053B6A000F3C8A /* Vacations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vacations.swift; sourceTree = "<group>"; };
 		47E2F6742A06CC3D000F3C8A /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
+		47F78B352A3F63730032F173 /* AnimatableNumber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableNumber.swift; sourceTree = "<group>"; };
+		47F78B372A4081A60032F173 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				47D57A112968BBF900BDCB80 /* Employee.swift */,
+				47F78B372A4081A60032F173 /* Login.swift */,
 				47E2F6722A053B6A000F3C8A /* Vacations.swift */,
 				47DEC6E729B259B5004C2227 /* MDPModel.swift */,
 			);
@@ -191,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				47D57A2A2975A16100BDCB80 /* SearchBar.swift */,
+				47F78B352A3F63730032F173 /* AnimatableNumber.swift */,
 			);
 			path = ViewElements;
 			sourceTree = "<group>";
@@ -296,6 +302,8 @@
 				4734473A2948E6C300776BC1 /* CityADSPortalApp.swift in Sources */,
 				47D57A26296DF82100BDCB80 /* NavigationViewController.swift in Sources */,
 				47DEC6F729B25CAE004C2227 /* MultiDatePicker.swift in Sources */,
+				47F78B362A3F63730032F173 /* AnimatableNumber.swift in Sources */,
+				47F78B382A4081A60032F173 /* Login.swift in Sources */,
 				47DEC6EE29B25AE3004C2227 /* MDPContentView.swift in Sources */,
 				4734475129548A2E00776BC1 /* Network.swift in Sources */,
 				47DEC6F229B25BF9004C2227 /* MDPMonthYearPicker.swift in Sources */,

@@ -38,7 +38,8 @@ struct EmployeeCardScreen: View {
                     Text(employee.email)}
                 HStack {Text("Telegram:")
                     Text(employee.telegram)}
-                Text("Bithday")
+                HStack {Text("Bithday:")
+                    Text(employee.bday.convertToString(withFormat: "d MMMM"))}
             }
             .padding(10)
             Spacer()
@@ -53,7 +54,7 @@ struct EmployeeCardScreen: View {
 
 struct EmployeeCardScreen_Previews: PreviewProvider {
     static var previews: some View {
-        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram", phone: "79253596165", skype: "")
+        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram", phone: "79253596165", skype: "", bday: Date())
         EmployeeCardScreen(employee: employee)
     }
 }

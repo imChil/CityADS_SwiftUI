@@ -45,7 +45,7 @@ func avatar(inImage: UIImage?) -> Image {
 
 struct EmployeeCell_Previews: PreviewProvider {
     static var previews: some View {
-        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram", phone: "79253596165", skype: "")
+        let employee = Employee(id: "1", name: "Name name name", jobName: "Developer", department: "Core", email: "1@mail.ru", telegram: "@telegram", phone: "79253596165", skype: "", bday: Date())
         EmployeeCell(employeeData: employee)
     }
 }

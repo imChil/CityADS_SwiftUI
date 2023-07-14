@@ -2,39 +2,41 @@
 import SwiftUI
 
 struct VacationCell: View {
-    var avatar: UIImage?
-    let start: Date
-    let end: Date
+
+    @Binding var data: Vacation
+    @Binding var allVacations: [Vacation]
+    
     @EnvironmentObject var monthDataModel: MDPModel
     
     var body: some View {
-        HStack{
-            avatar(inImage: avatar)
-                .resizable()
-                .scaledToFit()
-                .frame(width: 35, height: 35, alignment: .center)
-                .clipShape(Circle())
-                .overlay(Circle().stroke(Color("DigitalCYAN"), lineWidth: 2))
-                .padding(.horizontal, 5)
-            Text(FormateStringFromDate(date: start))
-            Text(" - ")
-            Text(FormateStringFromDate(date: end))
+        VStack{
+            HStack{
+                avatar(inImage: data.avatar)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 35, height: 35, alignment: .center)
+                    .clipShape(Circle())
+                    .overlay(Circle().stroke(Color("DigitalCYAN"), lineWidth: 2))
+                    .padding(.horizontal, 5)
+                Text(data.start.convertToString())
+                Text(" - ")
+                Text(data.end.convertToString())
+            }
+            if data.isActive {
+                Text(data.name)
+            }
         }
         .onTapGesture {
+            for i in allVacations {
+                allVacations[i.id-1].isActive = false
+            }
             withAnimation(){
+                data.isActive = true
                 monthDataModel.selections.removeAll()
-                monthDataModel.selections = [start, end]
+                monthDataModel.selections = [data.start, data.end]
             }
         }
         
-    }
-    
-    func FormateStringFromDate(date: Date) -> String {
-        let formater = DateFormatter()
-        formater.dateStyle = .short
-        formater.timeStyle = .none
-        formater.dateFormat = "dd.MM.yyyy"
-        return formater.string(from: date)
     }
     
     func avatar(inImage: UIImage?) -> Image {
@@ -43,8 +45,10 @@ struct VacationCell: View {
 }
 
 struct VacationCell_Previews: PreviewProvider {
+    @State static var item = Vacation(id: 1, idEmployee: "e8f865a3-a66e-11eb-80bc-00155d043f13", start: Date(), end: Date(), name: "", jobName: "", department: "")
+    @State static var vatations = [Vacation]()
     static var previews: some View {
-        VacationCell(start: Date(), end: Date())
+        VacationCell(data: $item, allVacations: $vatations)
             .environmentObject(MDPModel())
     }
 }

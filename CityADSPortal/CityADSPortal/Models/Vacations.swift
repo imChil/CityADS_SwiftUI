@@ -18,6 +18,9 @@ struct VacationCodable: Identifiable, Codable {
     let idEmployee: String
     let start: String
     let end: String
+    let name: String
+    let jobName: String
+    let department: String
     
 }
 
@@ -26,7 +29,11 @@ struct Vacation: Identifiable {
     let idEmployee: String
     let start: Date
     let end: Date
+    let name: String
+    let jobName: String
+    let department: String
     var avatar: UIImage?
+    var isActive = false
     
 }
 
@@ -36,7 +43,13 @@ func convertVacationResult(vacationsCodable: [VacationCodable]) -> [Vacation] {
     var vacationsArray : [Vacation] = []
     
     for item in vacationsCodable {
-        var vacation = Vacation(id: item.id, idEmployee: item.idEmployee, start: DateFromString(item.start), end: DateFromString(item.end))
+        var vacation = Vacation(id: item.id,
+                                idEmployee: item.idEmployee,
+                                start: item.start.convertToDate(),
+                                end: item.end.convertToDate(),
+                                name: item.name,
+                                jobName: item.jobName,
+                                department: item.department)
         imageManager.getImage(id: item.idEmployee) { avatar in
             vacation.avatar = avatar
         }
@@ -46,14 +59,3 @@ func convertVacationResult(vacationsCodable: [VacationCodable]) -> [Vacation] {
     return vacationsArray
 }
 
-func DateFromString(_ dateFromAPI: String) -> Date {
-    
-    let formater = DateFormatter()
-    formater.dateStyle = .short
-    formater.timeStyle = .none
-    formater.dateFormat = "yyyy-MM-dd"
-    let result = formater.date(from: dateFromAPI)
-    
-    return result ?? Date()
-    
-}

@@ -139,12 +139,18 @@ struct MultiDatePicker: View {
             List{
                 ForEach(vacations) { vacation in
                     if calendar.component(.month, from: monthModel.controlDate) == calendar.component(.month, from: vacation.start) || calendar.component(.month, from: monthModel.controlDate) == calendar.component(.month, from: vacation.end) {
-                        VacationCell(avatar: vacation.avatar, start: vacation.start, end: vacation.end)
+                        VacationCell(data: $vacations[vacation.id-1], allVacations: $vacations)
+                            .scaledToFit()
                             .environmentObject(monthModel)
+                    }
+                    
+                }
+                .onTapGesture {
+                    for i in vacations {
+                        vacations[i.id-1].isActive = false
                     }
                 }
             }
-            
             .onAppear(){
                 NetworkService.shared.getVacations(id: id) {result in
                     DispatchQueue.main.async {
@@ -166,7 +172,7 @@ struct MultiDatePicker: View {
         guard let start = monthModel.selections.first else { return }
         guard let end = monthModel.selections.last else { return }
         
-        var vacation = Vacation(id: self.vacations.count+1, idEmployee: id, start: start, end: end)
+        var vacation = Vacation(id: self.vacations.count+1, idEmployee: id, start: start, end: end, name: "", jobName:"", department: "")
         imageManager.getImage(id: id) { avatar in
             vacation.avatar = avatar
         }

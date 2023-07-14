@@ -11,6 +11,7 @@ struct EmployeeCodable: Codable {
     let telegram: String
     let phone: String
     let skype: String
+    let bday: String
 }
     
 
@@ -24,6 +25,7 @@ struct Employee: Identifiable {
     let phone: String
     let skype: String
     var avatar: UIImage?
+    let bday: Date
 }
 
 
@@ -40,7 +42,8 @@ func convertEmployeeResult(employeeCodable: [EmployeeCodable]) -> [Employee] {
                                 telegram: item.telegram,
                                 phone: item.phone,
                                 skype: item.skype,
-                                avatar: nil)
+                                avatar: nil,
+                                bday: item.bday.convertToDate())
         employeeArray.append(employee)
     }
     

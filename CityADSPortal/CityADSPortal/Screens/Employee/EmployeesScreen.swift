@@ -14,9 +14,9 @@ struct EmployeesScreen: View {
                 ProgressView()
             }
             List {
-                ForEach(departments(employees: searchText.isEmpty ? employeeService.employeeList : employeeService.employeeList.filter({$0.name.contains(searchText) || $0.jobName.contains(searchText)})).sorted(), id: \.self) { department in
+                ForEach(departments(employees: employeeService.filter(searchText: searchText)).sorted(), id: \.self) { department in
                     Section {
-                        ForEach(employeeService.employeeList.filter({ searchText.isEmpty ? $0.department==department : ($0.name.contains(searchText) || $0.jobName.contains(searchText)) && $0.department==department})) { employee in
+                        ForEach(employeeService.filter(searchText: searchText).filter({ $0.department==department })) { employee in
                             EmployeeCell(employeeData: employee)
                         }
                     } header: {

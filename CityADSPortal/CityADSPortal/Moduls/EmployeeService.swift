@@ -23,6 +23,13 @@ final class EmployeeService: ObservableObject {
         }
     }
     
+    func filter(searchText: String) -> [Employee] {
+        
+        
+        return searchText.isEmpty ? employeeList : employeeList.filter({$0.name.uppercased().contains(searchText.uppercased()) || $0.jobName.uppercased().contains(searchText.uppercased())})
+        
+    }
+    
     private func fillImages() {
         
         for (i, item) in employeeList.enumerated() {

@@ -23,7 +23,7 @@ final class NetworkService {
     
     static let shared = NetworkService()
     
-    private var session = URLSession(configuration: URLSessionConfiguration.default, delegate: NTLMAuthenticationSessionTaskDelegate(user:"p.chilin", password:"***"), delegateQueue: nil)
+    private var session = URLSession(configuration: URLSessionConfiguration.default, delegate: NTLMAuthenticationSessionTaskDelegate(user:"p.chilin", password:"Chil66621)"), delegateQueue: nil)
     
     private func request(url: String, completion: @escaping (Data) -> Void) {
         

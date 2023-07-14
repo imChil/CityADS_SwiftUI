@@ -12,8 +12,11 @@ extension Image {
 }
 
 extension Date {
+    
     static var yesterday: Date { return Date().dayBefore }
     static var tomorrow:  Date { return Date().dayAfter }
+    
+    
     var dayBefore: Date {
         return Calendar.current.date(byAdding: .day, value: -1, to: noon)!
     }
@@ -29,4 +32,29 @@ extension Date {
     var isLastDayOfMonth: Bool {
         return dayAfter.month != month
     }
+    
+    func convertToString(withFormat dateFormat : String = "dd.MM.yyyy") -> String {
+        let formater = DateFormatter()
+        formater.dateStyle = .short
+        formater.timeStyle = .none
+        formater.dateFormat = dateFormat
+        return formater.string(from: self)
+    }
+    
+}
+
+extension String {
+    
+    func convertToDate() -> Date {
+        
+        let formater = DateFormatter()
+        formater.dateStyle = .short
+        formater.timeStyle = .none
+        formater.dateFormat = "yyyy-MM-dd"
+        let result = formater.date(from: self)
+        
+        return result ?? Date()
+        
+    }
+    
 }
